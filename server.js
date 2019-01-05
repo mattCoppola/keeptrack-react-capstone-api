@@ -62,6 +62,10 @@ app.get('/api/users', (req, res) => {
 	res.json({ok: true});
 });
 
+app.get('/api/auth', (req, res) => {
+	res.json({ok: true});
+});
+
 let server;
 
 // this function connects to our database, then starts the server
