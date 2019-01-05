@@ -14,6 +14,7 @@ mongoose.Promise = global.Promise;
 const {
     router: usersRouter
 } = require('./users');
+
 const {
     router: authRouter,
     localStrategy,
@@ -59,11 +60,15 @@ app.use(
 //////////////////
 
 app.get('/api/users', (req, res) => {
-	res.json({ok: true});
+	res.json({ok: 'true - /users/'});
 });
 
 app.get('/api/auth', (req, res) => {
-	res.json({ok: true});
+	res.json({ok: 'true - /auth/'});
+});
+
+app.post('/api/post', (req, res) => {
+	res.json({ok: 'post succes'});
 });
 
 let server;
