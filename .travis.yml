@@ -1,0 +1,11 @@
+language: node_js
+node_js: node
+services:
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: rem+FdTamo4jvSUKD1xsnoMRVUiBMhIq4Rjs49RaZpcFKc3L6ICwBYkweYHH1XEG+mg/XI9cpOW0GPbibiV4Owd+9REPgrEhRD2TENcroqIs/3cXwggednUyxKb4c/rVrzSH3H8SjMS6vg/+m1U8Jjqs8nzOY9olOebYMx3BwuWJWX3ua1RCsBnirnRJ50kikyzDQ8EZ/LPAsSMQcyCKqqk75g5X5GLx5JAReu5tSHVMLdZjNJy9s8Ys8VfyWj/A71G5Flpm7GeY2E8plZk8ByjBWtJUFP/cdfHHG8qoTwcm/sEqlx60FFcDDtMU+2PHPbKZ+DdMZWMcEpID9LTZdkpoMPhjkMNpchDOodWYyQhm/09UNTzjAVw9CA4ATh3ZNvTEJQG/YUUrQp4wFDunmwtdki1sJ6rI2nv1D/uNMDaZIFwJMISmCAGpuxt4C2fJ7xOmGxbxa2bj8RLIEdNEPx1ZlxE1DdWsCNo5hNb1zVxw92Z3cht1D6h2wsVfyLRXdOUo6lRoY3C7WFN4O/1+1QGC4V5QZ6xFEzUsq+xJYymmHykp+CpiKXsqk7mJRn5NJfm0CC452+Av8yuHh0HtRISyOWnAnPpA7IWVc6/MdjRzTSwiDFK2SzstCfmziX2FDJhpUXhZzkwKvsx9rM2bSU4Bsr+x9Iv8i+c+KPBQEMs=
+  app: keeptrack-react
+  on:
+    repo: mattCoppola/keeptrack-react-capstone-api
