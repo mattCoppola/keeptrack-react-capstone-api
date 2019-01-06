@@ -56,6 +56,12 @@ const jwtAuth = passport.authenticate('jwt', {
 //     })
 // );
 
+///////////////////////
+//Workorder Endpoints//
+///////////////////////
+
+// Create New Workorder //
+
 app.post('/api/auth/dashboard', (req, res) => {
     console.log('POSTing new Workorder');
     let newWorkorder = req.body;
@@ -72,6 +78,30 @@ app.post('/api/auth/dashboard', (req, res) => {
     });
 });
 
+// Retrieve Workorders //
+
+app.get('/api/auth/dashboard', (req, res) => {
+    console.log('GETting Workorders');
+    Workorder.find()
+        .sort(
+            "created"
+        )
+        .then(function (results) {
+            let resultsOutput = [];
+            results.map(function (result) {
+                resultsOutput.push(result);
+            });
+            res.json({
+                resultsOutput
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        });
+});
 
 //////////////////
 //TEST Endpoints//
