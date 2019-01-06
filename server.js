@@ -27,7 +27,8 @@ const app = express();
 
 // import models from ./models/user
 const {
-    User
+    User,
+    Workorder
 } = require('./models/user');
 
 app.use(morgan('common'));
@@ -49,11 +50,28 @@ const jwtAuth = passport.authenticate('jwt', {
 });
 
 //Use cors since this is being served on Heroku
-app.use(
-    cors({
-        origin: CLIENT_ORIGIN
+// app.use(
+//     cors({
+//         origin: CLIENT_ORIGIN
+//     })
+// );
+
+app.post('/api/auth/dashboard', (req, res) => {
+    console.log('POSTing new Workorder');
+    let newWorkorder = req.body;
+    console.log(newWorkorder);
+    Workorder.create(newWorkorder)
+    .then(created => {
+        res.status(201).json(created);
     })
-);
+    .catch(err => {
+        console.log('Error: ', err);
+        return res.status(500).json({
+            error: 'internal server error'
+        });
+    });
+});
+
 
 //////////////////
 //TEST Endpoints//

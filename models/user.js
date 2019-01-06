@@ -13,6 +13,37 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+const workorderSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: false
+    },
+    caseNumber: {
+        type: String,
+        required: false
+    },
+    customerName: {
+        type: String,
+        required: false
+    },
+    serialNumber: {
+        type: String,
+        required: false
+    },
+    partReplaced: {
+        type: String,
+        required: false
+    },
+    notes: {
+        type: String,
+        required: false
+    },
+    created: {
+        type: Date,
+        default: Date.now
+    }
+});
+
 // Returns user information without password info
 userSchema.methods.serialize = function () {
     return {
@@ -30,7 +61,9 @@ userSchema.statics.hashPassword = function (password) {
 }
 
 const User = mongoose.model('User', userSchema, 'user');
+const Workorder = mongoose.model('Workorder', workorderSchema);
 
 module.exports = {
-    User
+    User,
+    Workorder
 };
