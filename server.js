@@ -104,9 +104,33 @@ app.get('/api/auth/dashboard', (req, res) => {
         });
 });
 
+// PUT (update) Workorder //
+
+app.put('/api/auth/workorder/:id', (req, res) => {
+    console.log('Updating Workorder', req.body);
+    Workorder.findByIdAndUpdate(req.params.id, {
+        $set: {
+            "username": req.body.username,
+            "caseNumber": req.body.caseNumber,
+            "customerName": req.body.customerName,
+            "serialNumber": req.body.serialNumber,
+            "partReplaced": req.body.partReplaced,
+            "notes": req.body.notes
+        }
+    })
+    .then(function (result) {
+        return res.status(204).end();
+    }).catch(function (err) {
+        return res.status(500).json({
+            message: 'Internal Server error'
+        });
+    });
+});
+
+
 // Delete Workorders //
 
-app.delete('/api/auth/dashboard/:id', (req, res) => {
+app.delete('/api/auth/workorder/:id', (req, res) => {
     console.log('Deleting ID: ', req.params.id);
     Workorder.findByIdAndRemove(req.params.id)
     .then(function (workorder) {
