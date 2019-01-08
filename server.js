@@ -163,6 +163,27 @@ app.get('/api/auth/inventory', (req, res) => {
         });
 });
 
+// PUT (update) Inventory //
+
+app.put('/api/auth/inventory/:id', (req, res) => {
+    console.log('Updating Inventory', req.body);
+    Inventory.findByIdAndUpdate(req.params.id, {
+        $set: {
+            "partNumber": req.body.partNumber,
+            "cost": req.body.cost,
+            "price": req.body.price,
+            "qty": req.body.price
+        }
+    })
+    .then(function (result) {
+        return res.status(204).end();
+    }).catch(function (err) {
+        return res.status(500).json({
+            message: 'Internal Server error'
+        });
+    });
+});
+
 // Delete Inventory //
 
 app.delete('/api/auth/inventory/:id', (req, res) => {
