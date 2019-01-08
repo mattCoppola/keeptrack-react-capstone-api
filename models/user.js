@@ -44,6 +44,25 @@ const workorderSchema = new mongoose.Schema({
     }
 });
 
+const inventorySchema = new mongoose.Schema({
+    partNumber: {
+        type: String,
+        required: true
+    },
+    cost: {
+        type: Number,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    qty: {
+        type: Number,
+        required: true
+    }
+});
+
 // Returns user information without password info
 userSchema.methods.serialize = function () {
     return {
@@ -62,8 +81,10 @@ userSchema.statics.hashPassword = function (password) {
 
 const User = mongoose.model('User', userSchema, 'user');
 const Workorder = mongoose.model('Workorder', workorderSchema);
+const Inventory = mongoose.model('Inventory', inventorySchema);
 
 module.exports = {
     User,
-    Workorder
+    Workorder,
+    Inventory
 };

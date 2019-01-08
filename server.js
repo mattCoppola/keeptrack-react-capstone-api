@@ -28,7 +28,8 @@ const app = express();
 // import models from ./models/user
 const {
     User,
-    Workorder
+    Workorder,
+    Inventory
 } = require('./models/user');
 
 app.use(morgan('common'));
@@ -102,6 +103,43 @@ app.get('/api/auth/dashboard', (req, res) => {
             });
         });
 });
+
+// Delete Workorders //
+
+app.delete('/api/auth/dashboard/:id', (req, res) => {
+    console.log('Deleting ID: ', req.params.id);
+    Workorder.findByIdAndRemove(req.params.id)
+    .then(function (workorder) {
+        return res.status(200).end();
+    }).catch(function (err) {
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        });
+    });
+});
+
+///////////////////////
+//Inventory Endpoints//
+///////////////////////
+
+// Create New Inventory //
+
+app.post('/api/auth/inventory', (req, res) => {
+    console.log('POSTing new Inventory');
+    let newInventory = req.body;
+    console.log(newInventory);
+    Inventory.create(newInventory)
+    .then(created => {
+        res.status(201).json(created);
+    })
+    .catch(err => {
+        console.log('Error: ', err);
+        return res.status(500).json({
+            error: 'internal server error'
+        });
+    });
+});
+
 
 //////////////////
 //TEST Endpoints//
