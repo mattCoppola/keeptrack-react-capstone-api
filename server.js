@@ -141,6 +141,42 @@ app.post('/api/auth/inventory', (req, res) => {
 });
 
 
+// Retrieve Inventory //
+
+app.get('/api/auth/inventory', (req, res) => {
+    console.log('GETting Inventory');
+    Inventory.find()
+        .then(function (inventory) {
+            let inventoryItems = [];
+            inventory.map(function (item) {
+                inventoryItems.push(item);
+            });
+            res.json({
+                inventoryItems
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        });
+});
+
+// Delete Inventory //
+
+app.delete('/api/auth/inventory/:id', (req, res) => {
+    console.log('Deleting ID: ', req.params.id);
+    Inventory.findByIdAndRemove(req.params.id)
+    .then(function (item) {
+        return res.status(200).end();
+    }).catch(function (err) {
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        });
+    });
+});
+
 //////////////////
 //TEST Endpoints//
 //////////////////
