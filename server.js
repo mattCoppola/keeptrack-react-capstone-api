@@ -130,7 +130,7 @@ app.put('/api/auth/workorder/:id', (req, res) => {
 
 // Delete Workorders //
 
-app.delete('/api/auth/workorder/:id', (req, res) => {
+app.delete('/api/auth/workorder/:id', jwtAuth, (req, res) => {
     console.log('Deleting ID: ', req.params.id);
     Workorder.findByIdAndRemove(req.params.id)
     .then(function (workorder) {
