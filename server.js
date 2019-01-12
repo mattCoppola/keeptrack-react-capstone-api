@@ -63,7 +63,7 @@ const jwtAuth = passport.authenticate('jwt', {
 
 // Create New Workorder //
 
-app.post('/api/auth/dashboard', (req, res) => {
+app.post('/api/auth/dashboard', jwtAuth, (req, res) => {
     console.log('POSTing new Workorder');
     let newWorkorder = req.body;
     console.log(newWorkorder);
@@ -81,7 +81,7 @@ app.post('/api/auth/dashboard', (req, res) => {
 
 // Retrieve Workorders //
 
-app.get('/api/auth/dashboard', (req, res) => {
+app.get('/api/auth/dashboard', jwtAuth, (req, res) => {
     console.log('GETting Workorders');
     Workorder.find()
         .sort(
