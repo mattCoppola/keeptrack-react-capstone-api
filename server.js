@@ -167,7 +167,7 @@ app.post('/api/auth/inventory', (req, res) => {
 
 // Retrieve Inventory //
 
-app.get('/api/auth/inventory', (req, res) => {
+app.get('/api/auth/inventory', jwtAuth, (req, res) => {
     console.log('GETting Inventory');
     Inventory.find()
         .then(function (inventory) {
@@ -207,7 +207,7 @@ app.put('/api/auth/inventory/:id', (req, res) => {
 
 // Delete Inventory //
 
-app.delete('/api/auth/inventory/:id', (req, res) => {
+app.delete('/api/auth/inventory/:id', jwtAuth, (req, res) => {
     console.log('Deleting ID: ', req.params.id);
     Inventory.findByIdAndRemove(req.params.id)
     .then(function (item) {
