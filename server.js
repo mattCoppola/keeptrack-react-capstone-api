@@ -192,11 +192,8 @@ app.get('/api/auth/inventory', (req, res) => {
 app.put('/api/auth/inventory/:id', (req, res) => {
     console.log('Updating Inventory', req.body);
     Inventory.findByIdAndUpdate(req.params.id, {
-        $set: {
-            "partNumber": req.body.partNumber,
-            "cost": req.body.cost,
-            "price": req.body.price,
-            "qty": req.body.price
+        $inc: {
+            "qty": -1
         }
     })
     .then(function (result) {
