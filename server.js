@@ -51,11 +51,11 @@ const jwtAuth = passport.authenticate('jwt', {
 });
 
 // Use cors since this is being served on Heroku
-// app.use(
-//     cors({
-//         origin: CLIENT_ORIGIN
-//     })
-// );
+app.use(
+    cors({
+        origin: CLIENT_ORIGIN
+    })
+);
 
 ///////////////////////
 //Workorder Endpoints//
