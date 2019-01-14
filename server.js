@@ -41,6 +41,8 @@ app.use(express.json());
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
+
+
 //Tells our app to use users and authentication routes
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
@@ -51,11 +53,15 @@ const jwtAuth = passport.authenticate('jwt', {
 });
 
 // Use cors since this is being served on Heroku
-app.use(
-    cors({
-        origin: CLIENT_ORIGIN
-    })
-);
+// app.use(
+//     cors({
+//         origin: CLIENT_ORIGIN
+//     })
+// );
+
+app.use(cors());
+app.options('*', cors());
+
 
 ///////////////////////
 //Workorder Endpoints//
