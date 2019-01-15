@@ -10,6 +10,17 @@ const BasicStrategy = require('passport-http').BasicStrategy;
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
+const app = express();
+
+// Use cors since this is being served on Heroku
+app.use(
+    cors({
+        origin: CLIENT_ORIGIN
+    })
+);
+
+app.options('*', cors());
+
 // Implement routers from ./users & ./auth
 const {
     router: usersRouter
@@ -23,7 +34,7 @@ const {
 
 const {PORT, CLIENT_ORIGIN, DATABASE_URL} = require('./config')
 
-const app = express();
+
 
 // import models from ./models/user
 const {
@@ -51,16 +62,6 @@ app.use('/api/auth/', authRouter);
 const jwtAuth = passport.authenticate('jwt', {
     session: false
 });
-
-// Use cors since this is being served on Heroku
-// app.use(
-//     cors({
-//         origin: CLIENT_ORIGIN
-//     })
-// );
-
-app.use(cors());
-app.options('*', cors());
 
 
 ///////////////////////
